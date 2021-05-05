@@ -3,8 +3,10 @@ import express, { json } from "express";
 const app = express();
 app.use(json());
 
-app.get("/", (request, response) => {
-  return response.json({ message: "Hello, TypeScript!" });
+app.get("/healthcheck", (req, res) => {
+  return res.status(200).json({
+    result: "success",
+  });
 });
 
 app.listen(3005, () => {

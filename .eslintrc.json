@@ -1,0 +1,38 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier" // Uses eslint-config-prettier to disable ESLint rules that would conflict with prettier
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "project": "tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "prefer-const": "error",
+    "@typescript-eslint/no-unused-params": "off",
+
+    // "import/order": [
+    //   "error",
+    //   {
+    //     "newlines-between": "never",
+    //     "groups": [
+    //       ["builtin", "external"],
+    //       ["internal", "parent", "sibling", "index"]
+    //     ]
+    //   }
+    // ],
+
+    "node/no-unsupported-features/es-syntax": [
+      "error",
+      { "ignores": ["modules"] }
+    ]
+  }
+}
