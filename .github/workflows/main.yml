@@ -46,7 +46,17 @@ jobs:
         run: |
           yarn test --reporters=default --reporters=jest-github-actions-reporter --coverage
 
-      - name: "Test Coverage"
+      - name: "Test Coverage (master)"
+        if: github.ref == 'refs/heads/master'
+        uses: mattallty/jest-github-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          test-command: "yarn test:coverage"
+          coverage-comment: false
+
+      - name: "Test Coverage (PR)"
+        if: github.ref != 'refs/heads/master'
         uses: mattallty/jest-github-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
