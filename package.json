@@ -10,9 +10,16 @@
     "node": "14"
   },
   "scripts": {
-    "build": "tsc",
-    "start": "ts-node-dev --no-notify --watch .env --exit-child --ignore-watch node_modules --transpile-only src/main.ts",
-    "lint": "eslint src --ext js,ts"
+    "build": "tsc -p tsconfig.prod.json",
+    "postinstall": "yarn build",
+    "start": "node dist/main.js",
+    "develop": "ts-node-dev --no-notify --watch .env --exit-child --ignore-watch node_modules --transpile-only src/main.ts",
+    "lint": "eslint src --ext js,ts",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test-all": "yarn lint && yarn typecheck && yarn test"
   },
   "husky": {
     "hooks": {
@@ -20,7 +27,9 @@
     }
   },
   "devDependencies": {
+    "@types/dotenv-safe": "^8.1.1",
     "@types/express": "^4.17.11",
+    "@types/jest": "^26.0.23",
     "@types/node": "^15.0.2",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "@typescript-eslint/parser": "^4.22.1",
@@ -28,11 +37,14 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-node": "^11.1.0",
     "husky": "^6.0.0",
+    "jest": "^26.6.3",
     "prettier": "^2.2.1",
+    "ts-jest": "^26.5.6",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.4"
   },
   "dependencies": {
+    "dotenv-safe": "^8.2.0",
     "express": "^4.17.1"
   }
 }

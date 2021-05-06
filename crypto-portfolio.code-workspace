@@ -16,13 +16,13 @@
       // Dotenv syntax
       "mikestead.dotenv",
       // Github's official extension
-      "github.vscode-pull-request-github"
+      "github.vscode-pull-request-github",
 
       // Official jest
-      // "orta.vscode-jest",
+      "orta.vscode-jest",
 
       // Extra small jest runner
-      // "firsttris.vscode-jest-runner",
+      "firsttris.vscode-jest-runner"
 
       // Prisma
       // "prisma.prisma",
@@ -51,11 +51,13 @@
     // Disable the built-in formatters as we're using prettier
     "javascript.format.enable": false,
     "typescript.format.enable": false,
+
     // defaultFormatter: exceptions
     // "[sql]": {
     //   "editor.formatOnSave": false,
     //   "editor.defaultFormatter": "mtxr.sqltools"
     // },
+
     // Format every file by default
     "editor.formatOnSave": true,
     "[html]": {
@@ -72,10 +74,10 @@
     },
 
     "eslint.packageManager": "yarn",
-    //   "files.associations": {
-    //     // Any file starting with `.env.` is also a dotenv
-    //     ".env.*": "dotenv"
-    //   },
+    "files.associations": {
+      // Any file starting with `.env.` is also a dotenv
+      ".env.*": "dotenv"
+    },
 
     //   "github.gitAuthentication": true,
     //   "githubIssues.issueBranchTitle": "feature/${issueNumber}-${sanitizedIssueTitle}",
@@ -95,8 +97,8 @@
     //     }
     //   ],
 
-    //   "jest.autoEnable": false,
-    //   "jest.pathToJest": "yarn test",
+    "jest.autoEnable": false,
+    // "jest.pathToJest": "yarn test",
 
     //   "json.schemas": [
     //     {

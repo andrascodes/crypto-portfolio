@@ -1,4 +1,7 @@
 import express, { json } from "express";
+import dotenv from "dotenv-safe";
+
+dotenv.config();
 
 const app = express();
 app.use(json());
