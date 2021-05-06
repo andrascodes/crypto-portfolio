@@ -46,11 +46,6 @@ jobs:
         run: |
           yarn test --reporters=default --reporters=jest-github-actions-reporter --coverage
 
-      - name: "Test Coverage"
-        uses: artiomtr/jest-coverage-report-action@v1.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: "Typecheck"
         run: yarn typecheck
 
