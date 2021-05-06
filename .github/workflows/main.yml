@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-nodemodules-
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
 
       # Running jest with a reporter that will format the results properly for GitHub annotations
       - name: "Jest"
