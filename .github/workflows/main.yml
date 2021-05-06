@@ -1,0 +1,60 @@
+name: CI testing
+
+on: [push]
+
+jobs:
+  tests:
+    name: "Tests"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v2
+
+      - name: Setting up Node.js 14
+        uses: actions/setup-node@v2
+        # It's better to set the version strictly to
+        # be able to cache node_modules
+        with:
+          node-version: "14"
+
+      # Caching steps
+      - name: Yarn cache
+        uses: actions/cache@v2
+        with:
+          path: .yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          # If that key can be found, just use another cache we have (same prefix)
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # Cache every package's node_modules' folder
+      - name: node_modules cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */node_modules
+          key: ${{ runner.os }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-nodemodules-
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      # Running jest with a reporter that will format the results properly for GitHub annotations
+      - name: "Jest"
+        run: |
+          yarn test --reporters=default --reporters=jest-github-actions-reporter --coverage
+
+      - name: "Test Coverage"
+        uses: mattallty/jest-github-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          test-command: "yarn test:coverage"
+
+      - name: "Typecheck"
+        run: yarn typecheck
+
+      - name: "Lint"
+        run: yarn lint
